@@ -1,7 +1,8 @@
-"MATCH (s:Supplier {company_name: $name})-[r]-(p:Product) " +
-"RETURN p";
+CREATE INDEX index_supplier IF NOT EXISTS
+FOR (s:Supplier)
+ON (s.supplier_name)
 
 
-"MATCH (s:Supplier {supplier_id: $id}) "+
-"SET s.company_name = $name " +
-"RETURN s";
+CREATE CONSTRAINT unique_supplier IF NOT EXISTS
+FOR (s:Supplier)
+REQUIRE (s.supplier_id) IS UNIQUE
